@@ -23,10 +23,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Application definition
 
-INSTALLED_APPS = [
-    'modules.home',
-    'modules.search',
-
+WAGTAIL_APPS = [
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -37,18 +34,28 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
+    'wagtail.core'
+]
 
+DJANGO_APPS = [
     'modelcluster',
     'taggit',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
+
+SITE_APPS = [
+    'modules.core',
+    'modules.home',
+    'modules.search',
+    'modules.blog_posts'
+]
+
+INSTALLED_APPS = WAGTAIL_APPS + DJANGO_APPS + SITE_APPS
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}template-blog-index{% endblock %}
+
+{% block content %}
+  <h1>Blog Posts</h1>
+
+  {% for page in self.get_children %}
+    <h2><a href="{% pageurl page %}">{{page.title}}</a></h2>
+    <p>
+      {{page.specific.body|striptags|truncatewords:30}}
+    </p>
+  {% endfor %}
+{% endblock content %}
