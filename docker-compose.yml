@@ -17,7 +17,7 @@ services:
       args:
         - POSTGRES_HOST_AUTH_METHOD=trust
         - WAGTAIL_ENV=development
-    entrypoint: ["./script/wait-for-it.sh", "db:5432"]
+    entrypoint: ["./script/wait-for-it.sh", "db:5432", "--"]
     volumes:
       - ./app/:/usr/srv/app:Z
       - ./app/media:/usr/srv/app/media:Z
