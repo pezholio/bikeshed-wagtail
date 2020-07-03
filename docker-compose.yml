@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:10-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - docker-compose.env
+  web:
+    env_file:
+      - docker-compose.env
+    restart: always
+    build:
+      context: .
+      args:
+        - POSTGRES_HOST_AUTH_METHOD=trust
+        - WAGTAIL_ENV=development
+    entrypoint: ["./script/wait-for-it.sh", "db:5432"]
+    volumes:
+      - ./app/:/usr/srv/app:Z
+      - ./app/media:/usr/srv/app/media:Z
+
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
