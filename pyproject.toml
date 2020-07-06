@@ -9,9 +9,16 @@ license = "MIT"
 python = "^3.7"
 wagtail = "^2.9.1"
 psycopg2 = "^2.8"
+consoler = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"
+factory-boy = "^2.12.0"
+pytest-cov = "^2.10.0"
+pytest-django = "^3.9.0"
+pytest-factoryboy = "^2.0.3"
+pytest-pythonpath = "^0.7.3"
+pytest-sugar = "^0.9.3"
 
 [build-system]
 requires = ["poetry>=0.12"]
