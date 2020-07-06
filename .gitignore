@@ -1,2 +1,7 @@
 *.pyc
 /.vscode
+
+# Project
+app/media/**/*
+app/static/**/*
+/node_modules
