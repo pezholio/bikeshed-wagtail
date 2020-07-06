@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  web:
+    env_file:
+      - docker-compose.env
+    restart: always
+    build:
+      context: .
+      args:
+        - POSTGRES_HOST_AUTH_METHOD=trust
+        - WAGTAIL_ENV=test
+    volumes:
+      - ./app/:/usr/srv/app:Z
+      - ./app/media:/usr/srv/app/media:Z
