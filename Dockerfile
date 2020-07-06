@@ -1,20 +1,19 @@
-FROM python:3.7.8-alpine3.12 as base
+FROM python:3.8.3-buster as base
 
-RUN apk update && apk add --no-cache \
-  bash \
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends  \
   gcc \
   musl-dev \
   libffi-dev \
-  openssl-dev \
-  zlib-dev \
+  libssl-dev \
+  zlib1g-dev \
   nodejs \
-  jpeg-dev \
-  libc-dev \
-  libffi-dev \
+  libjpeg-dev \
+  linux-libc-dev \
   libpng-dev \
-  libsass \
-  nodejs-npm \
-  postgresql-dev
+  libsass-dev \
+  npm \
+  postgresql-client
 
 ENV POETRY_VERSION=1.0.9
 
