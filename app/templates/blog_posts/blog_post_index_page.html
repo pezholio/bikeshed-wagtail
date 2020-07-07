@@ -10,6 +10,7 @@
     <article>
       <time class="time" datetime="{{page.first_published_at|date:"c"}}">{{page.first_published_at|date:"j F Y"}}</time>
       <h2><a href="{% pageurl page %}">{{page.title}}</a></h2>
+      {% include "blog_posts/_tags.html" with tags=page.specific.tags %}
       <p>
         {{page.specific.body|striptags|truncatewords:30}}
       </p>

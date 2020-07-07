@@ -1,0 +1,7 @@
+{% if tags.all.count %}
+  <div class="tags">
+    {% for tag in tags.all %}
+      <span class="tag">{{ tag }}</button>
+    {% endfor %}
+  </div>
+{% endif %}

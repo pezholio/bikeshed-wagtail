@@ -25,6 +25,20 @@ def test_blog_post_title_is_visible(blog_post):
 
     assert blog_post.title in str(rv.content)
 
+def test_blog_post_tags_are_visible(blog_post):
+    """Test that a blog post's tags are visible on the blog post template
+    """
+    blog_post.tags.add("foo", "bar", "baz")
+    blog_post.save_revision().publish()
+    blog_post.save()
+
+    rv = client.get(blog_post.url)
+
+    assert "foo" in str(rv.content)
+    assert "bar" in str(rv.content)
+    assert "baz" in str(rv.content)
+
+
 def test_blog_post_cannot_have_subpages():
     """Test that blog posts cannot have subpages
     """
