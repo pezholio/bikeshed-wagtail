@@ -1,0 +1,56 @@
+// Base site
+$base-font-colour: $black;
+$body-background-colour: $white;
+
+// Links
+$link-colour: $brand-secondary;
+$link-hover-colour: darken($link-colour, 15);
+$link-visited-colour: #4c2c92;
+
+// Buttons
+$button: $brand-primary;
+$button-inactive: lighten($brand-primary, 50);
+$button-hover: darken($button, 15);
+$dark-button: darken($brand-secondary, 15);
+
+// Margins and paddings
+$gutter: 20px;
+$gutter-medium: 15px;
+$gutter-mobile: 15px;
+$medium-spacing: 10px;
+
+// Breakpoints
+$large-screen: 1300px;
+$big-screen: 1024px;
+$medium-screen: 900px;
+$small-screen: 768px;
+$smaller-screen: 520px;
+$tiny-screen: 480px;
+
+$lightest: $white;
+$darkest: $black;
+
+// Errors and notifications
+$highlight: $dxw-yellow;
+$error: $dxw-red;
+$success: $dxw-light-green;
+$info: $brand-primary;
+$alert: $dxw-orange;
+
+// grid variables
+$dxw-grid: (
+  columns: 4,
+  gutter: $gutter,
+);
+
+$dxw-grid-medium: (
+  columns: 12,
+  gutter: $gutter,
+  media: $medium-screen,
+);
+
+$dxw-grid-mobile: (
+  columns: 2,
+  gutter: $gutter-mobile,
+  media: "screen and (max-width: 768px)",
+);

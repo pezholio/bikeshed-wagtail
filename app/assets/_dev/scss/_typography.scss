@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Cardo:400,400i&display=swap');
+
+$system-font-family-sans: -apple-system, '.SFNSText-Regular', 'San Francisco', 'Roboto', 'Segoe UI', 'Helvetica Neue', Sans-Serif;
+// Use system-font-family for iOS/ Android devices. Listed are: Apple iOS system font, iOS San Francisco, Apple San Francisco, Android, Windows Phone;
+$font-family-sans: 'Poppins', $system-font-family-sans;
+$header-font-family: 'Poppins', $font-family-sans;
+$font-family-serif: 'Cardo', Times, Serif;
+$font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
+$base-font: $font-family-serif;
+$base-line-height: 1.4;
+$header-line-height: 1.4;
+$print-font-size: 18px;
+
+$body-font-size: (null: 18px, $smaller-screen: 16px);
+$h1-font-size: (null: 36px, $smaller-screen: 30px);
+$h2-font-size: (null: 30px, $smaller-screen: 25px);
+$h3-font-size: (null: 27px, $smaller-screen: 23px);
+$h4-font-size: (null: 24px, $smaller-screen: 17px);
+$h5-font-size: (null: 20px, $smaller-screen: 15px);
+$h6-font-size: (null: 18px, $smaller-screen: 14px);
+$highlight-font-size: (null: 24px, $smaller-screen: 20px);
+$small-font-size: (null: 17px, $smaller-screen: 15px);
+$header-nav-font-size: (null: 20px, $medium-screen: 17px, $small-screen: 17px);
+
+body {
+  font-family: $base-font;
+  @include font-size-map($body-font-size);
+  font-weight: 400;
+  line-height: $base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $base-font-colour;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.7em;
+  font-family: $header-font-family;
+  line-height: $header-line-height;
+  font-weight: 600;
+}
+
+h1 {
+  @include font-size-map($h1-font-size);
+  margin-bottom: $gutter*2;
+}
+
+h2 {
+  @include font-size-map($h2-font-size);
+}
+
+h3 {
+  @include font-size-map($h3-font-size);
+}
+
+h4 {
+  @include font-size-map($h4-font-size);
+}
+
+h5 {
+  @include font-size-map($h5-font-size);
+}
+
+h6 {
+  @include font-size-map($h6-font-size);
+}
+
+small, .small {
+  @include font-size-map($small-font-size);
+}
+
+strong {
+  font-family: $header-font-family;
+}
+
+ul, ol {
+  list-style-position: outside;
+  padding-left: $gutter;
+}
+
+ul {
+
+  li {
+    list-style-type: disc;
+  }
+}
+
+ol {
+
+  li {
+    list-style-type: decimal;
+  }
+}
+
+blockquote {
+  position: relative;
+  margin: 1.4em 0;
+  @include font-size-map($highlight-font-size);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 17px;
+  }
+
+  &:before {
+    top: 10px;
+    left: 0;
+  }
+
+  p {
+    margin-bottom: 0;
+    padding: 0 $gutter*3;
+  }
+}
+
+cite {
+  display: block;
+  margin-left: $gutter*3;
+  font-style: normal;
+  font-family: $header-font-family;
+  color: $dark-grey;
+  padding-bottom: 3px;
+}
+
+p, pre {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+// Links
+a {
+  color: $link-colour;
+  text-decoration: none;
+  border-bottom: 3px solid rgba($brand-primary, 0.2);
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $link-hover-colour;
+    border-bottom-color: rgba($link-hover-colour, 0.4);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  a {
+    border-bottom: none;
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid $medium-grey;
+  margin: $gutter 0 0;
+}
+
+address {
+  font-style: normal;
+}
+
+// Rich Text. Anything spat out by WordPress is/should be wrapped in a .rich-text class
+.rich-text {
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  ul, ol {
+    margin: 1em 0;
+  }
+}

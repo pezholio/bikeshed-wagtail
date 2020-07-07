@@ -1,16 +1,30 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Cardo:400,700&display=swap");
-
-$navy: #243746;
-$ivory: #f9f8f5;
+@import 'colours';
+@import 'globals';
+@import 'mixins';
+@import 'typography';
 
 body {
-  font-family: Cardo, -apple-system, serif;
-  font-weight: 400;
-  font-size: 15pt;
-  color: $navy;
-  line-height: 1.5;
+  background-color: $ivory;
   margin: 0;
   padding: 0;
-  background: $ivory;
+}
+
+#container {
+  max-width: 36em;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 0 3em;
+  position: relative;
+
+  h1, h2, h3, h4, h5 {
+    font-family: Poppins, -apple-system, sans-serif;
+  }
+}
+
+.template-blog-index {
+  article {
+    margin: 3em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid #eee;
+  }
 }
