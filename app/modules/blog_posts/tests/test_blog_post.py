@@ -1,5 +1,6 @@
 import pytest
 from django.test import Client
+from modules.blog_posts.models import BlogPost, BlogPostIndexPage
 
 pytestmark = pytest.mark.django_db
 
@@ -23,4 +24,16 @@ def test_blog_post_title_is_visible(blog_post):
     rv = client.get(blog_post.url)
 
     assert blog_post.title in str(rv.content)
+
+def test_blog_post_cannot_have_subpages():
+    """Test that blog posts cannot have subpages
+    """
+    assert BlogPost.allowed_subpage_models() == []
+
+def test_blog_posts_parent_pages():
+    """Test that blog posts cannot have subpages
+    """
+    assert BlogPost.allowed_parent_page_models() == [
+        BlogPostIndexPage
+    ]
 
