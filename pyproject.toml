@@ -10,6 +10,8 @@ python = "^3.7"
 wagtail = "^2.9.1"
 psycopg2 = "^2.8"
 consoler = "^0.1.2"
+django-assets = "^2.0"
+libsass = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"

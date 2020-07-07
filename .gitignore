@@ -1,6 +1,13 @@
 *.pyc
 /.vscode
 
+# Caches
+.webassets-cache
+.webassets-cache/*
+app/assets/.webassets-cache
+app/assets/.webassets-cache/*
+app/assets/dist/*
+
 # Project
 app/media/**/*
 app/static/**/*

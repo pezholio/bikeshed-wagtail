@@ -2,5 +2,5 @@
 set -e
 
 docker-compose -f docker-compose.test.yml build
-docker-compose -f docker-compose.test.yml run web python manage.py collectstatic --no-input
+script/build_assets --environment=test
 docker-compose -f docker-compose.test.yml run --rm web pytest

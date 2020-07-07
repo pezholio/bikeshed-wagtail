@@ -1,4 +1,5 @@
 #!/bin/bash
 set -e
 
+script/build_assets
 docker-compose run --service-ports --rm web python manage.py runserver 0.0.0.0:5000

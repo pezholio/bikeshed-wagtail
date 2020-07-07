@@ -38,6 +38,7 @@ WAGTAIL_APPS = [
 ]
 
 DJANGO_APPS = [
+    'django_assets',
     'modelcluster',
     'taggit',
     'django.contrib.admin',
@@ -143,6 +144,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+ASSETS_ROOT = os.path.join(BASE_DIR, 'assets')
+ASSETS_MODULES = [
+    'config.assets'
+]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

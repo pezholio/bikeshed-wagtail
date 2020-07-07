@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+COMPOSE_FILE="docker-compose.yml"
+
+while [ "$1" ]; do
+  case $1 in
+    --environment=*)
+      COMPOSE_FILE="docker-compose.${1#*=}.yml"
+      ;;
+    *)
+      echo "Unexpected argument: $1"
+      exit 1
+      ;;
+  esac
+
+  shift
+done
+
+docker-compose -f "$COMPOSE_FILE" \
+  run --rm web \
+  sh -c "python manage.py assets clean && \
+  python manage.py assets build && \
+  python manage.py  collectstatic --no-input"
