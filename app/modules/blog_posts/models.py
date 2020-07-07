@@ -29,3 +29,16 @@ class BlogPost(BasePage):
 class BlogPostIndexPage(BaseIndexPage):
     subpage_types = ['BlogPost']
     max_count = 1
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        request_tags = request.GET.get('tag', None)
+        if request_tags:
+            tags = request_tags.split(',')
+            children = BlogPost.objects.filter(tags__slug__in=tags).distinct()
+        else:
+            children = context['page'].get_children()
+
+        context.update({'children': children})
+
+        return context

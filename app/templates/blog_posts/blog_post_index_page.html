@@ -6,7 +6,7 @@
 {% block content %}
   <h1>Blog Posts</h1>
 
-  {% for page in self.get_children %}
+  {% for page in children %}
     <article>
       <time class="time" datetime="{{page.first_published_at|date:"c"}}">{{page.first_published_at|date:"j F Y"}}</time>
       <h2><a href="{% pageurl page %}">{{page.title}}</a></h2>
