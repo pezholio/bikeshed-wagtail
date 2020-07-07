@@ -3,4 +3,4 @@ set -e
 
 docker-compose -f docker-compose.test.yml build
 script/build_assets --environment=test
-docker-compose -f docker-compose.test.yml run --rm web pytest
+script/test --environment=test

@@ -1,4 +1,23 @@
 #!/bin/bash
 set -e
 
-docker-compose run --rm web pytest "$@"
+COMPOSE_FILE="docker-compose.yml"
+ARGS=()
+
+while [ "$1" ]; do
+  case $1 in
+    --environment=*)
+      COMPOSE_FILE="docker-compose.${1#*=}.yml"
+      shift
+      ;;
+    *)
+    ARGS+=("$1")
+    shift
+  esac
+done
+
+set -- "${ARGS[@]}"
+
+docker-compose -f "$COMPOSE_FILE" \
+  run --rm web \
+  pytest "$@"
