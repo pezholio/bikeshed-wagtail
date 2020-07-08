@@ -38,6 +38,16 @@ def test_blog_post_tags_are_visible(blog_post):
     assert "bar" in str(rv.content)
     assert "baz" in str(rv.content)
 
+def test_author_is_visible(blog_post, author):
+    author.name = "Jane Smith"
+    author.save()
+
+    blog_post.authors.add(author)
+    blog_post.save()
+
+    rv = client.get(blog_post.url)
+
+    assert(author.name) in str(rv.content)
 
 def test_blog_post_cannot_have_subpages():
     """Test that blog posts cannot have subpages

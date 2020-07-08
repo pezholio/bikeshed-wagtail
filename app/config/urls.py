@@ -7,6 +7,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from modules.search import views as search_views
+from modules.authors.views import AuthorAutocomplete
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
@@ -16,6 +17,11 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
 
+    url(
+        r'^author-autocomplete/$',
+        AuthorAutocomplete.as_view(),
+        name='author-autocomplete',
+    ),
 ]
 
 

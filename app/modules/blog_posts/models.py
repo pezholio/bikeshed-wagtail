@@ -5,6 +5,8 @@ from modules.core.models.abstract import BasePage, BaseIndexPage
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from dal_select2.widgets import ModelSelect2Multiple
+from modelcluster.fields import ParentalManyToManyField
 
 class BlogPostTag(TaggedItemBase):
     content_object = ParentalKey(
@@ -17,14 +19,29 @@ class BlogPost(BasePage):
     parent_page_types = ['BlogPostIndexPage']
     subpage_types = []
 
+    authors = ParentalManyToManyField(
+        'authors.Author',
+        blank=False,
+        related_name='pages_%(class)s'
+    )
+
     tags = ClusterTaggableManager(through=BlogPostTag, blank=True)
 
     content_panels = [
         FieldPanel('title'),
         FieldPanel('first_published_at'),
+        FieldPanel(
+            'authors',
+            widget=ModelSelect2Multiple(url='author-autocomplete')
+        ),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
     ]
+
+    def author_list(self):
+        return (", ").join(
+            map(lambda author: author.name, self.authors.all())
+        )
 
 class BlogPostIndexPage(BaseIndexPage):
     subpage_types = ['BlogPost']

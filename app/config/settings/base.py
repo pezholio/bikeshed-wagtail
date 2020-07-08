@@ -24,8 +24,10 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", None)
 # Application definition
 
 WAGTAIL_APPS = [
+    'wagtail.contrib.modeladmin',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.styleguide',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -41,6 +43,8 @@ DJANGO_APPS = [
     'django_assets',
     'modelcluster',
     'taggit',
+    'dal',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,7 +57,8 @@ SITE_APPS = [
     'modules.core',
     'modules.home',
     'modules.search',
-    'modules.blog_posts'
+    'modules.blog_posts',
+    'modules.authors'
 ]
 
 INSTALLED_APPS = WAGTAIL_APPS + DJANGO_APPS + SITE_APPS

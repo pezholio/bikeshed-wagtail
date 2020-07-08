@@ -137,6 +137,23 @@ webassets = ">=2.0"
 
 [[package]]
 category = "main"
+description = "Fresh autocompletes for Django"
+name = "django-autocomplete-light"
+optional = false
+python-versions = "*"
+version = "3.5.1"
+
+[package.dependencies]
+six = "*"
+
+[package.extras]
+genericm2m = ["django-generic-m2m"]
+gfk = ["django-querysetsequence (>=0.11)"]
+nested = ["django-nested-admin (>=3.0.21)"]
+tags = ["django-taggit"]
+
+[[package]]
+category = "main"
 description = "Django extension to allow working with 'clusters' of models as a single unit, independently of the database"
 name = "django-modelcluster"
 optional = false
@@ -659,7 +676,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "0e9624c2cb3aa30d4417b7483c0375cc99ee7eba6cf6d20f44a60b948dddd6a0"
+content-hash = "472737b8eef020507253dadeda80f1dc4290a9ecf10031a6e6837fd7ef20f3ba"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -740,6 +757,9 @@ django = [
 django-assets = [
     {file = "django-assets-2.0.tar.gz", hash = "sha256:8abb81e66b4db602bb7b5e5d1f1b5c6511c3e7d8d4804be50bbb77e5ce898639"},
     {file = "django_assets-2.0-py3-none-any.whl", hash = "sha256:3e4267a453bb6a30a4bcfb4f971a6876a542b5f500167afda892973335c8ac60"},
+]
+django-autocomplete-light = [
+    {file = "django-autocomplete-light-3.5.1.tar.gz", hash = "sha256:52e8d468060a5911c44300a374d74058c90e65bfdf87ace151abac67279c4ae5"},
 ]
 django-modelcluster = [
     {file = "django-modelcluster-5.0.2.tar.gz", hash = "sha256:c7a42cf9b93d1161a10bf59919f7ee52d996a523a4134b2a136f6fe1eba7a2fa"},
