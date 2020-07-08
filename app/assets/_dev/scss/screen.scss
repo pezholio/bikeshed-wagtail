@@ -4,9 +4,11 @@
 @import 'typography';
 
 body {
-  background-color: $ivory;
+  background: $ivory;
   margin: 0;
   padding: 0;
+  background: $ivory url("/static/img/dxw-bikeshed-primary-background.svg") no-repeat bottom right;
+  background-attachment: fixed;
 }
 
 #container {
@@ -26,5 +28,19 @@ body {
     margin: 3em 0;
     padding: 1em 0;
     border-bottom: 1px solid #eee;
+
+    h2 {
+      margin-bottom: 0.2em;
+      line-height: 1.1em;
+    }
+  }
+}
+
+.template-blog-post {
+  article {
+    h1 {
+      margin-bottom: 0.2em;
+      line-height: 1.1em;
+    }
   }
 }
