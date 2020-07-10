@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+echo "==> Rebuilding Docker container…"
+docker-compose build
+
+echo "==> Running migrations…"
+script/manpy migrate
+
+echo "==> Building assets…"
+script/build_assets
+
