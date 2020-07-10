@@ -1,63 +1,65 @@
 import pytest
+
 from django.test import Client
 from modules.blog_posts.models import BlogPost, BlogPostIndexPage
-
-pytestmark = pytest.mark.django_db
+from wagtail.core.models import Page, Site
+from modules.blog_posts.tests.factories import BlogPostFactory, BlogPostIndexFactory
+from modules.authors.tests.factories import AuthorFactory
 
 client = Client()
 
-def test_blog_post_gets_created(blog_post):
-    """Test that we have a blog post created by the fixture
-    """
-    assert blog_post is not None
+pytestmark = pytest.mark.django_db
 
-def test_blog_post_has_the_correct_title(blog_post):
-    """Test that the blog post has the expected title
-    """
-    blog_post.title = "Here is a blog post"
-    blog_post.save()
-    assert blog_post.title == "Here is a blog post"
+class TestBlogPost():
+    def test_blog_post_gets_created(self):
+        """Test that we have a blog post created by the fixture
+        """
+        blog_post = BlogPostFactory.create()
+        assert blog_post is not None
 
-def test_blog_post_title_is_visible(blog_post):
-    """Test that the blog post title and content is visible in the template
-    """
-    rv = client.get(blog_post.url)
+    def test_blog_post_has_the_correct_title(self):
+        """Test that the blog post has the expected title
+        """
+        blog_post = BlogPostFactory.create(title="Here is a blog post")
+        assert blog_post.title == "Here is a blog post"
 
-    assert blog_post.title in str(rv.content)
+    def test_blog_post_title_is_visible(self):
+        """Test that the blog post title and content is visible in the template
+        """
+        blog_post = BlogPostFactory.create()
+        rv = client.get(blog_post.url)
 
-def test_blog_post_tags_are_visible(blog_post):
-    """Test that a blog post's tags are visible on the blog post template
-    """
-    blog_post.tags.add("foo", "bar", "baz")
-    blog_post.save_revision().publish()
-    blog_post.save()
+        assert blog_post.title in str(rv.content)
 
-    rv = client.get(blog_post.url)
+    def test_blog_post_tags_are_visible(self):
+        """Test that a blog post's tags are visible on the blog post template
+        """
+        blog_post = BlogPostFactory.create(tags=("foo", "bar", "baz"))
 
-    assert "foo" in str(rv.content)
-    assert "bar" in str(rv.content)
-    assert "baz" in str(rv.content)
+        rv = client.get(blog_post.url)
 
-def test_author_is_visible(blog_post, author):
-    author.name = "Jane Smith"
-    author.save()
+        assert "foo" in str(rv.content)
+        assert "bar" in str(rv.content)
+        assert "baz" in str(rv.content)
 
-    blog_post.authors.add(author)
-    blog_post.save()
+    def test_author_is_visible(self):
+        blog_post = BlogPostFactory.create(authors=[
+            AuthorFactory(name="Jane Smith")
+        ])
 
-    rv = client.get(blog_post.url)
+        rv = client.get(blog_post.url)
 
-    assert(author.name) in str(rv.content)
+        assert("Jane Smith") in str(rv.content)
 
-def test_blog_post_cannot_have_subpages():
-    """Test that blog posts cannot have subpages
-    """
-    assert BlogPost.allowed_subpage_models() == []
+    def test_blog_post_cannot_have_subpages(self):
+        """Test that blog posts cannot have subpages
+        """
+        assert BlogPost.allowed_subpage_models() == []
 
-def test_blog_posts_parent_pages():
-    """Test that blog posts cannot have subpages
-    """
-    assert BlogPost.allowed_parent_page_models() == [
-        BlogPostIndexPage
-    ]
+    def test_blog_posts_parent_pages(self):
+        """Test that blog posts cannot have subpages
+        """
+        assert BlogPost.allowed_parent_page_models() == [
+            BlogPostIndexPage
+        ]
 
