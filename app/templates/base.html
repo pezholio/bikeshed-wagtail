@@ -24,7 +24,22 @@
     <body class="{% block body_class %}{% endblock %}">
         <div id="container">
             {% wagtailuserbar %}
+            <header>
+                <a href="/">
+                    <img src="/static/img/dxw-logo.png" alt="dxw bikeshed" class="headerlogo" />
+                </a>
+            </header>
             {% block content %}{% endblock %}
+            <footer>
+                <p>
+                    <a href="#container">Back to the top</a>
+                </p>
+                <form id="search" action="{{ search_action|default:"/search/" }}" method="get" role="search">
+                    <div class="autocomplete-container" id="autocomplete-container"></div>
+                    <input id="search-field" name="{{ search_field_name|default:"query" }}" type="search" placeholder="Search the bikeshed" autocomplete="off" >
+                    <button type="submit">Search</button>
+                </form>
+            </footer>
         </div>
     </body>
 </html>
