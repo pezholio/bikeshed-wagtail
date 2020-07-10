@@ -1,0 +1,47 @@
+.pager {
+  text-align: center;
+  margin: 2em auto;
+
+  .pagination {
+    display: inline-block;
+
+    li {
+      display: inline;
+      list-style-type: none;
+
+      &.next {
+        &.arrow {
+          &:after {
+            content:">";
+            font-family: $font-family-sans;
+            color: $dxw-turquoise;
+          }
+        }
+      }
+
+      &.prev {
+        &.arrow {
+          &:before {
+            content:"<";
+            font-family: $font-family-sans;
+            color: $dxw-turquoise;
+            padding-right: 10px;
+          }
+        }
+      }
+
+      a {
+        margin-right: 10px;
+        border-bottom: 0;
+        color: $brand-secondary;
+        text-decoration: none;
+        border: none;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+}

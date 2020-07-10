@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import Paginator
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel
 from modules.core.models.abstract import BasePage, BaseIndexPage
@@ -50,12 +51,20 @@ class BlogPostIndexPage(BaseIndexPage):
     def get_context(self, request):
         context = super().get_context(request)
         request_tags = request.GET.get('tag', None)
+        page = int(request.GET.get('page', 1))
+
         if request_tags:
             tags = request_tags.split(',')
-            children = BlogPost.objects.filter(tags__slug__in=tags).distinct()
+            objects = BlogPost.objects.filter(tags__slug__in=tags).distinct()
         else:
-            children = context['page'].get_children()
+            objects = context['page'].get_children()
 
-        context.update({'children': children})
+        paginator = Paginator(objects, 5)
+        children = paginator.page(page)
+
+        context.update({
+            'children': children,
+            'paginator': paginator
+        })
 
         return context
