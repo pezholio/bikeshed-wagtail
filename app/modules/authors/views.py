@@ -2,6 +2,7 @@ from dal import autocomplete
 
 from .models import Author
 
+
 class AuthorAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated:

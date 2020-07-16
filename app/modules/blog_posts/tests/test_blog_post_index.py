@@ -8,7 +8,8 @@ pytestmark = pytest.mark.django_db
 
 client = Client()
 
-class TestBlogPostIndex():
+
+class TestBlogPostIndex:
     def test_blog_post_index_gets_created(self):
         blog_post_index_page = BlogPostIndexFactory.create()
         assert blog_post_index_page is not None
@@ -32,7 +33,9 @@ class TestBlogPostIndex():
     def test_blog_post_index_filters_by_tag(self):
         blog_post_index_page = BlogPostIndexFactory.create()
         tagged_post = BlogPostFactory.create(tags=["foo"], parent=blog_post_index_page)
-        untagged_post = BlogPostFactory.create(tags=["bar"], parent=blog_post_index_page)
+        untagged_post = BlogPostFactory.create(
+            tags=["bar"], parent=blog_post_index_page
+        )
 
         rv = client.get(blog_post_index_page.url + "?tag=foo")
 
@@ -42,9 +45,7 @@ class TestBlogPostIndex():
     def test_blog_post_index_page_subpages(self):
         """Test that blog posts cannot have subpages
         """
-        assert BlogPostIndexPage.allowed_subpage_models() == [
-            BlogPost
-        ]
+        assert BlogPostIndexPage.allowed_subpage_models() == [BlogPost]
 
     def test_blog_post_index_page_has_pagination(self):
         blog_post_index_page = BlogPostIndexFactory.create()
@@ -53,11 +54,10 @@ class TestBlogPostIndex():
         rv = client.get(blog_post_index_page.url)
         assert rv.status_code == 200
 
-        assert "<a class=\"current\" href=\"/blog/?page=1\">1</a>" in str(rv.content)
-        assert "<a href=\"/blog/?page=2\">2</a>" in str(rv.content)
-        assert "<a href=\"/blog/?page=3\">3</a>" in str(rv.content)
-        assert "<a href=\"/blog/?page=4\">4</a>" in str(rv.content)
-        assert "<a href=\"/blog/?page=5\">5</a>" in str(rv.content)
+        assert '<a class="current" href="/blog/?page=1">1</a>' in str(rv.content)
+        assert '<a href="/blog/?page=2">2</a>' in str(rv.content)
+        assert '<a href="/blog/?page=3">3</a>' in str(rv.content)
+        assert '<a href="/blog/?page=4">4</a>' in str(rv.content)
+        assert '<a href="/blog/?page=5">5</a>' in str(rv.content)
         assert "<li>...</li>" in str(rv.content)
-        assert "<a href=\"/blog/?page=2\">Next</a>" in str(rv.content)
-
+        assert '<a href="/blog/?page=2">Next</a>' in str(rv.content)

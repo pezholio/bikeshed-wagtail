@@ -9,6 +9,7 @@ from modules.authors.tests.factories import AuthorFactory
 
 pytestmark = pytest.mark.django_db
 
+
 class BlogPostIndexFactory(CorePageFactory):
     title = "Blog"
 
@@ -17,14 +18,13 @@ class BlogPostIndexFactory(CorePageFactory):
         return Site.objects.all()[0].root_page
 
     class Meta:
-      model = BlogPostIndexPage
+        model = BlogPostIndexPage
+
 
 class BlogPostFactory(CorePageFactory):
-    title = factory.Sequence(lambda n: 'Blog Post %d' % n)
-    body = wagtail_factories.StreamFieldFactory({
-      'paragraph': RichTextBlockFactory
-    })
-    body__0__paragraph__value="<p>This is some text</p>"
+    title = factory.Sequence(lambda n: "Blog Post %d" % n)
+    body = wagtail_factories.StreamFieldFactory({"paragraph": RichTextBlockFactory})
+    body__0__paragraph__value = "<p>This is some text</p>"
 
     @factory.lazy_attribute
     def parent(self):
@@ -48,4 +48,3 @@ class BlogPostFactory(CorePageFactory):
 
     class Meta:
         model = BlogPost
-

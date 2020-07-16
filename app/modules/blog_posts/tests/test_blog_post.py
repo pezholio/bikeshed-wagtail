@@ -10,7 +10,8 @@ client = Client()
 
 pytestmark = pytest.mark.django_db
 
-class TestBlogPost():
+
+class TestBlogPost:
     def test_blog_post_gets_created(self):
         """Test that we have a blog post created by the fixture
         """
@@ -43,13 +44,11 @@ class TestBlogPost():
         assert "baz" in str(rv.content)
 
     def test_author_is_visible(self):
-        blog_post = BlogPostFactory.create(authors=[
-            AuthorFactory(name="Jane Smith")
-        ])
+        blog_post = BlogPostFactory.create(authors=[AuthorFactory(name="Jane Smith")])
 
         rv = client.get(blog_post.url)
 
-        assert("Jane Smith") in str(rv.content)
+        assert ("Jane Smith") in str(rv.content)
 
     def test_blog_post_cannot_have_subpages(self):
         """Test that blog posts cannot have subpages
@@ -59,7 +58,4 @@ class TestBlogPost():
     def test_blog_posts_parent_pages(self):
         """Test that blog posts cannot have subpages
         """
-        assert BlogPost.allowed_parent_page_models() == [
-            BlogPostIndexPage
-        ]
-
+        assert BlogPost.allowed_parent_page_models() == [BlogPostIndexPage]

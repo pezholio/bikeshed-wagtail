@@ -9,14 +9,16 @@ from pytest_factoryboy import register
 
 pytestmark = pytest.mark.django_db
 
+
 class CorePageFactory(wagtail_factories.PageFactory):
     first_published_at = timezone.now()
 
     @factory.post_generation
     def publish(self, create, extracted, **kwargs):
-      if not create:
-          return
-      self.save_revision().publish()
+        if not create:
+            return
+        self.save_revision().publish()
+
 
 class RichTextBlockFactory(factory.Factory):
     @classmethod
@@ -30,4 +32,3 @@ class RichTextBlockFactory(factory.Factory):
 
     class Meta:
         model = blocks.RichTextBlock
-
