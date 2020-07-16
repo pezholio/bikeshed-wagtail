@@ -1,7 +1,7 @@
 {% if tags.all.count %}
-  <span class="tags">
-    {% for tag in tags.all %}
-      <a href="{{ page.specific.get_parent.url }}?tag={{ tag.slug }}" rel="tags">{{ tag }}</a>
-    {% endfor %}
-  </span>
+<span class="tags">
+  {% for tag in tags.all %}
+  <a href="{{ page.specific.get_parent.url }}tag/{{ tag.slug }}" rel="tags">{{ tag }}</a>
+  {% endfor %}
+</span>
 {% endif %}

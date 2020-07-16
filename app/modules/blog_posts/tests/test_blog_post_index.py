@@ -21,7 +21,7 @@ class TestBlogPostIndex:
         page1 = client.get(blog_post_index_page.url)
         assert page1.status_code == 200
 
-        page2 = client.get(blog_post_index_page.url + "?page=2")
+        page2 = client.get(blog_post_index_page.url + "page/2/")
         assert page2.status_code == 200
 
         for blog_post in blog_posts[:5]:
@@ -37,7 +37,7 @@ class TestBlogPostIndex:
             tags=["bar"], parent=blog_post_index_page
         )
 
-        rv = client.get(blog_post_index_page.url + "?tag=foo")
+        rv = client.get(blog_post_index_page.url + "tag/foo/")
 
         assert tagged_post.title in str(rv.content)
         assert untagged_post.title not in str(rv.content)
@@ -54,10 +54,10 @@ class TestBlogPostIndex:
         rv = client.get(blog_post_index_page.url)
         assert rv.status_code == 200
 
-        assert '<a class="current" href="/blog/?page=1">1</a>' in str(rv.content)
-        assert '<a href="/blog/?page=2">2</a>' in str(rv.content)
-        assert '<a href="/blog/?page=3">3</a>' in str(rv.content)
-        assert '<a href="/blog/?page=4">4</a>' in str(rv.content)
-        assert '<a href="/blog/?page=5">5</a>' in str(rv.content)
+        assert '<a class="current" href="/blog/page/1">1</a>' in str(rv.content)
+        assert '<a href="/blog/page/2">2</a>' in str(rv.content)
+        assert '<a href="/blog/page/3">3</a>' in str(rv.content)
+        assert '<a href="/blog/page/4">4</a>' in str(rv.content)
+        assert '<a href="/blog/page/5">5</a>' in str(rv.content)
         assert "<li>...</li>" in str(rv.content)
-        assert '<a href="/blog/?page=2">Next</a>' in str(rv.content)
+        assert '<a href="/blog/page/2">Next</a>' in str(rv.content)
