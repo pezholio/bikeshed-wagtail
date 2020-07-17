@@ -23,7 +23,14 @@
     {% if children.has_previous %}
     <li class="prev arrow"><a href="{{ page.url }}page/{{ children.previous_page_number }}">Previous</a></li>
     {% endif %}
-    {% for page_number in paginator.page_range %}
+    {% if children.number != 1 %}
+    <li><a href="{{ page.url }}page/1">1</a></li>
+    <li>...</li>
+    {% endif %}
+    {% with start=children.number|add:"-1" %}
+    {% with end=start|add:"5"|slugify %}
+    {% with articleSlice=start|slugify|add:":"|add:end %}
+    {% for page_number in paginator.page_range|slice:articleSlice %}
     <li>
       {% if page_number == children.number %}
       <a class="current" href="{{ page.url }}page/{{ page_number }}">{{ page_number }}</a>
@@ -32,6 +39,9 @@
       {% endif %}
     </li>
     {% endfor %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
     {% if paginator.num_pages > 5 %}
     <li>...</li>
     <li><a href="{{ page.url }}page/{{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
