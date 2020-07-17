@@ -67,7 +67,7 @@ class BlogPostIndexPage(RoutablePageMixin, BaseIndexPage):
     def _posts_for_page(self, page_number, objects=None):
         if objects is None:
             objects = self.get_children().specific()
-        paginator = Paginator(objects, 5)
+        paginator = Paginator(objects.order_by("first_published_at"), 5)
         children = paginator.page(page_number)
 
         return {"page": self, "children": children, "paginator": paginator}
